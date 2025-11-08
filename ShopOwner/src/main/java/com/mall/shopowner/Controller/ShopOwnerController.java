@@ -1,6 +1,5 @@
 package com.mall.shopowner.Controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -27,6 +26,12 @@ public class ShopOwnerController {
     @GetMapping("/{id}")
     public ShopOwner getOwnerById(@PathVariable Long id) {
         return service.getOwnerById(id);
+    }
+
+    // ✅ Added PUT method to update existing ShopOwner
+    @PutMapping("/{id}")
+    public ShopOwner updateOwner(@PathVariable Long id, @RequestBody ShopOwner updatedOwner) {
+        return service.updateOwner(id, updatedOwner);
     }
 
     @DeleteMapping("/{id}")

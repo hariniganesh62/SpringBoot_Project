@@ -1,6 +1,5 @@
 package com.mall.shopowner.Service;
 
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +26,19 @@ public class ShopOwnerService {
 
     public void deleteOwner(Long id) {
         repo.deleteById(id);
+    }
+
+    public ShopOwner updateOwner(Long id, ShopOwner updatedOwner) {
+        ShopOwner existingOwner = repo.findById(id).orElse(null);
+        if (existingOwner != null) {
+            existingOwner.setName(updatedOwner.getName());
+            existingOwner.setShopName(updatedOwner.getShopName());
+            existingOwner.setEmail(updatedOwner.getEmail());
+            existingOwner.setPassword(updatedOwner.getPassword());
+            existingOwner.setPhoneNumber(updatedOwner.getPhoneNumber());
+            existingOwner.setAddress(updatedOwner.getAddress());
+            return repo.save(existingOwner);
+        }
+        return null;
     }
 }
